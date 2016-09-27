@@ -1,0 +1,14 @@
+framed
+latexmk
+mptopdf
+upquote
+miktex-latex-config-2.9
+miktex-pdftex-base-2.9
+ltxbase
+cm
+latex-fonts
+miktex-metafont-base
+babel
+graphics
+graphics-def
+oberdiek
