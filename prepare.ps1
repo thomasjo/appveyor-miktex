@@ -10,7 +10,7 @@ Invoke-Expression ".\miktexsetup --local-package-repository=$RepoDir --package-s
 Invoke-Expression ".\miktexsetup --local-package-repository=$RepoDir --package-set=essential --portable=$TargetDir install"
 
 # Install individual packages...
-Set-Item env:Path "$TargetDir\texmfs\install\miktex\bin\x64;$env:Path"
+Set-Item env:Path "$TargetDir\texmfs\install\miktex\bin;$env:Path"
 Invoke-Expression "mpm --install-some=packages-add"
 
 # Remove individual packages...

@@ -10,8 +10,8 @@ function Expand-ZipFile($FilePath, $DestinationPath) {
   $Shell.Namespace($DestinationPath).CopyHere($ZipFile.Items(), 0x14) | Out-Null
 }
 
-$DownloadUrl = "http://mirrors.ctan.org/systems/win32/miktex/setup/miktexsetup-x64.zip"
-$FilePath = "$PSScriptRoot\miktexsetup-x64.zip"
+$DownloadUrl = "http://mirrors.ctan.org/systems/win32/miktex/setup/miktexsetup.zip"
+$FilePath = "$PSScriptRoot\miktexsetup.zip"
 $DestinationPath = "$PSScriptRoot"
 
 Write-Host "Downloading $DownloadUrl... " -NoNewline
