@@ -5,23 +5,23 @@ Remove-Item -Path $TargetDir -ErrorAction SilentlyContinue -WarningAction Silent
 $Date = ((Get-Date).ToUniversalTime()).ToString("ddd MMM  d HH:mm:ss yyyy UTC")
 $PosixTargetDir = $TargetDir -replace "\\","/"
 
-#$InstallScriptPath = (Get-ChildItem .\install-tl-*\install-tl-windows.bat).FullName
+Write-Host "Downloading repository..."
 Invoke-Expression ".\miktexsetup --local-package-repository=$RepoDir --package-set=essential download"
+Write-Host "Installing..."
 Invoke-Expression ".\miktexsetup --local-package-repository=$RepoDir --package-set=essential --portable=$TargetDir install"
+Invoke-Expression "initexmf --set-config-value=[MPM]AutoInstall=0"
 
-# Install individual packages...
-Set-Item env:Path "$TargetDir\texmfs\install\miktex\bin;$env:Path"
-Invoke-Expression "mpm --install-some=packages-add"
-
-# Remove individual packages...
+Write-Host "Removing packages..."
 $Packages = Get-Content -Path .\packages-remove
 ForEach ($Package In $Packages) {
   Invoke-Expression "mpm --uninstall=$Package"
 }
 
-#Remove-Item -Path "$TargetDir\texmf-dist\doc" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue -Recurse -Force
-#Remove-Item -Path "$TargetDir\texmf-dist\source" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue -Recurse -Force
+Write-Host "Installing packages..."
+Set-Item env:Path "$TargetDir\texmfs\install\miktex\bin;$env:Path"
+Invoke-Expression "mpm --install-some=packages-add"
 
+Write-Host "Creating tarball..."
 $TarballPath = "$PSScriptRoot\miktex-portable.tar"
 $PackagePath = "$TarballPath.xz"
 Remove-Item -Path $PackagePath -ErrorAction SilentlyContinue -WarningAction SilentlyContinue -Force
