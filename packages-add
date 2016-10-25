@@ -4,6 +4,7 @@ cm
 datatool
 etoolbox
 feynmf
+fp
 framed
 glossaries
 graphics
@@ -16,6 +17,7 @@ mfirstuc
 miktex-latex-config-2.9
 miktex-metafont-base
 miktex-metafont-misc
+miktex-metapost-base-2.7
 miktex-pdftex-base-2.9
 mptopdf
 nomencl
@@ -23,6 +25,7 @@ oberdiek
 substr
 supertabular
 textcase
+tools
 upquote
 xfor
 xkeyval

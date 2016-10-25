@@ -21,6 +21,12 @@ Write-Host "Installing packages..."
 Set-Item env:Path "$TargetDir\texmfs\install\miktex\bin;$env:Path"
 Invoke-Expression "mpm --install-some=packages-add"
 
+Write-Host "Installing Asymptote..."
+Start-Process -FilePath ".\asymptote-setup" -Wait -ArgumentList "/S /D=$TargetDir\asymptote"
+New-Item "$TargetDir\texmfs\install\tex\latex\asymptote" -type directory
+Copy-Item "$TargetDir\asymptote\asymptote.sty" -Destination "$TargetDir\texmfs\install\tex\latex\asymptote"
+Invoke-Expression "initexmf --update-fndb"
+
 Write-Host "Creating tarball..."
 $TarballPath = "$PSScriptRoot\miktex-portable.tar"
 $PackagePath = "$TarballPath.xz"

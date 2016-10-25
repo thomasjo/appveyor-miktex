@@ -21,3 +21,10 @@ Write-Host $TickMark
 Write-Host "Extracting $FilePath... " -NoNewline
 Expand-ZipFile -FilePath $FilePath -DestinationPath $DestinationPath
 Write-Host $TickMark
+
+$AsyDownloadUrl = "http://heanet.dl.sourceforge.net/project/asymptote/2.38/asymptote-2.38-setup.exe"
+$AsyFilePath = "$PSScriptRoot\asymptote-setup.exe"
+
+Write-Host "Downloading $AsyDownloadUrl... " -NoNewline
+(New-Object Net.WebClient).DownloadFile($AsyDownloadUrl, $AsyFilePath)
+Write-Host $TickMark
